@@ -1078,6 +1078,7 @@ function metadata(docs){
       id: doc.id,
       name: title(doc),
       shortName: shortName,
+      sort: doc.sort,
       type: doc.ngdoc,
       moduleName: doc.moduleName,
       shortDescription: doc.shortDescription(),
@@ -1169,6 +1170,10 @@ function sidebarSort(a, b){
 
   if (priorityA > -1 || priorityB > -1) {
     return priorityA < priorityB ? -1 : (priorityA > priorityB ? 1 : 0);
+  }
+
+  if(a.sort && b.sort) {
+    return parseInt(a.sort) - parseInt(b.sort);
   }
 
   function mangleName(doc) {
